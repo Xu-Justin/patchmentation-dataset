@@ -65,7 +65,7 @@ def unzip(path, output_path):
 
 def rm(path):
     print(f'remove {path}')
-    shutil.rmtree(path)
+    os.system(f'rm -rf {path}')
 
 class Version:
     @property
