@@ -76,11 +76,15 @@ class Version:
     def dataset(self):
         raise NotImplementedError
 
+    @property
+    def root(self):
+        _root = 'data/'
+        os.makedirs(_root, exist_ok=True)
+        return _root
+
     @cached_property
     def base_folder(self):
-        _base_folder = os.path.join('data/', self.name)
-        os.makedirs(_base_folder, exist_ok=True)
-        return _base_folder
+        return os.path.join(self.root, self.name)
 
     @property
     def file_zip(self):
