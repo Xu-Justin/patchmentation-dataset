@@ -11,6 +11,7 @@ def get_args_parser():
     parser.add_argument('--download', type=str, default=None, help='download_dataset')
     parser.add_argument('--no-remove-cache', action='store_true', help='do not remove cache')
     parser.add_argument('--remove', action='store_true', help='remove dataset')
+    parser.add_argument('--validate', action='store_true', help='validate dataset')
     args = parser.parse_args()
     return args
 
@@ -48,6 +49,10 @@ def main(args):
             args.download = None
             if not args.no_remove_cache:
                 utils.rm(version.file_zip)
+
+        if args.validate:
+            dataset = utils.patchmentation.utils.loader.load_yolo_dataset(version.folder_images, version.folder_annotations, version.file_names)
+            print(dataset)
 
         if args.remove:
             utils.rm(version.base_folder)
