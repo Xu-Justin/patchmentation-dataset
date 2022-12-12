@@ -59,9 +59,9 @@ def zip(path, output_path):
     print(f'zip {path} to {output_path}')
     os.system(f'zip -q -r {output_path} {path}')
 
-def unzip(path, output_path):
-    print(f'unzip {path} to {output_path}')
-    os.system(f'unzip -q {path} -d {output_path}')
+def unzip(path):
+    print(f'unzip {path}')
+    os.system(f'unzip -q {path}')
 
 def rm(path):
     print(f'remove {path}')

@@ -44,7 +44,7 @@ def main(args):
             if args.overwrite:
                 utils.rm(version.base_folder)
             utils.os.makedirs(version.base_folder)
-            utils.unzip(version.file_zip, version.base_folder)
+            utils.unzip(version.file_zip)
             args.download = None
             if not args.no_remove_cache:
                 utils.rm(version.file_zip)
