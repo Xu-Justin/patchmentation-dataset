@@ -10,6 +10,7 @@ def get_args_parser():
     parser.add_argument('--upload', action='store_true', help='upload dataset')
     parser.add_argument('--download', type=str, default=None, help='download_dataset')
     parser.add_argument('--no-remove-cache', action='store_true', help='do not remove cache')
+    parser.add_argument('--remove', action='store_true', help='remove dataset')
     args = parser.parse_args()
     return args
 
@@ -31,17 +32,22 @@ def main(args):
         print(version.name)
         if args.generate:
             version.generate(args.overwrite)
+
         if args.upload:
             utils.zip(version.base_folder, version.file_zip)
             utils.upload(version.file_zip)
             if not args.no_remove_cache:
                 utils.rm(version.file_zip)
+
         if args.download is not None:
             utils.download(args.download[0], version.file_zip)
             utils.unzip(version.file_zip, version.base_folder)
+            args.download = None
             if not args.no_remove_cache:
                 utils.rm(version.file_zip)
-            args.download = None
+                
+        if args.remove:
+            utils.rm(version.base_folder)
     
 if __name__ == '__main__':
     args = get_args_parser()
