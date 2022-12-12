@@ -1,6 +1,6 @@
 # patchmentation-benchmarking
 
-This repository contains dataset spesifications used to benchmark patch augmentation performance of [patchmentation](https://github.com/Xu-Justin/patchmentation).
+Dataset spesifications used to benchmark patch augmentation performance of [patchmentation](https://github.com/Xu-Justin/patchmentation).
 
 ## Install Requirements
 
