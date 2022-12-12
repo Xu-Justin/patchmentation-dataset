@@ -23,13 +23,13 @@ def main(args):
         versions.append(utils.VersionValidPascalVOC2007())
         
     if 'train-pascal-voc-2007-v1' in args.version:
-        version.append(utils.VersionTrainPascalVOC2007v1())
+        versions.append(utils.VersionTrainPascalVOC2007v1())
     
     if 'train-pascal-voc-2007-v2' in args.version:
-        version.append(utils.VersionTrainPascalVOC2007v2())
+        versions.append(utils.VersionTrainPascalVOC2007v2())
     
     if 'train-pascal-voc-2007-v3' in args.version:
-        version.append(utils.VersionTrainPascalVOC2007v3())
+        versions.append(utils.VersionTrainPascalVOC2007v3())
 
     for version in versions:
         print(version.name)
