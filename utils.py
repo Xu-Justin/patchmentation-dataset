@@ -64,8 +64,8 @@ def unzip(path, output_path):
     os.system(f'unzip -q {path} -d {output_path}')
 
 def rm(path):
-    print(f'rm -rf {path}')
-    os.system(f'remove {path}')
+    print(f'remove {path}')
+    shutil.rmtree(path)
 
 class Version:
     @property
