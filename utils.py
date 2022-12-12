@@ -167,6 +167,8 @@ class VersionTrainPascalVOC2007v2(Version):
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
             transform.RandomResize(width_range=(50, 150), aspect_ratio=transform.Resize.AUTO_ASPECT_RATIO),
+            filter.FilterWidth(30, Comparator.GreaterEqual),
+            filter.FilterHeight(30, Comparator.GreaterEqual),
             transform.SoftEdge(13, 20)
         ]
         max_n_patches = 10
