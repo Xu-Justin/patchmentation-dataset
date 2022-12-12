@@ -53,7 +53,7 @@ def upload(path):
 
 def download(url, path):
     print(f'download from {url} to {path}')
-    os.system(f'wget {url} -P {path}')
+    os.system(f'wget -c {url} -O {path}')
 
 def zip(path, output_path):
     print(f'zip {path} to {output_path}')
@@ -65,7 +65,7 @@ def unzip(path, output_path):
 
 def rm(path):
     print(f'rm -rf {path}')
-    os.system(f'rm -rf {path}')
+    os.system(f'remove {path}')
 
 class Version:
     @property
