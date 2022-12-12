@@ -40,12 +40,12 @@ def main(args):
                 utils.rm(version.file_zip)
 
         if args.download is not None:
-            utils.download(args.download[0], version.file_zip)
+            utils.download(args.download, version.file_zip)
             utils.unzip(version.file_zip, version.base_folder)
             args.download = None
             if not args.no_remove_cache:
                 utils.rm(version.file_zip)
-                
+
         if args.remove:
             utils.rm(version.base_folder)
     
