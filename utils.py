@@ -1,203 +1,60 @@
-import patchmentation
-from patchmentation.collections import Dataset
-from patchmentation.dataset import PASCAL_VOC_2007
-from patchmentation.utils import generator
-from patchmentation.utils import transform, filter, Comparator
-
+from version import Version
+from patchmentation.utils import loader
 import os, shutil
-from tqdm import tqdm
-from functools import cached_property
 
-def generate_file_images(file_images: str, folder_images: str):
-    with open(file_images, 'w') as f:
-        for file_name in tqdm(os.listdir(folder_images), desc=f'generate_yolo_file_images'):
-            if file_name.startswith('.'): continue
-            if not file_name.endswith(('.jpg', '.png')): continue
-            path = os.path.join(folder_images, file_name)
-            f.write(f'{path}\n')
+def generate(version: Version):
+    print(f'generate version: {version.name}, to {version.version_folder}')
+    version.generate()
 
-def generate_file_data(file_data: str, n_classes: int, file_images_train: str, file_images_valid: str, file_names: str, backup: str = 'backup/'):
-    with open(file_data, 'w') as f:
-        f.write(f'classes = {n_classes}\n')
-        f.write(f'train = {file_images_train}\n')
-        f.write(f'valid = {file_images_valid}\n')
-        f.write(f'name = {file_names}\n')
-        f.write(f'backup = {backup}\n')
+def validate(version: Version):
+    print(f'validate version: {version.name}, from {version.version_folder}')
+    _validate_yolo(version.name, version.folder_images, version.folder_annotations, version.file_names)
 
-def save_dataset(dataset: Dataset, folder: str):
-    os.makedirs(folder, exist_ok=True)
-    for i, image_patch in enumerate(dataset.image_patches):
-        file_image = os.path.join(folder, f'{i}.jpg')
-        file_annotation = os.path.join(folder, f'{i}.txt')
-        generator.save_yolo_image_patch(file_image, file_annotation, image_patch, dataset.classes)
+def remove(version: Version):
+    print(f'remove version: {version.name}, from {version.version_folder}')
+    _rm(version.version_folder)
 
-def generate_valid_dataset(dataset: Dataset, base_folder: str, folder_images: str, file_names: str, file_images: str, overwrite: bool = False):
-    if overwrite and os.path.exists(base_folder):
-        shutil.rmtree(base_folder)
-    os.makedirs(base_folder)
-    generator.save_yolo_names(file_names, dataset.classes)
-    save_dataset(dataset, folder_images)
-    generate_file_images(file_images, folder_images)
-    
-def generate_train_dataset(dataset: Dataset, n_images: int, base_folder: str, folder_images: str, file_names, file_images_train: str, file_images_valid: str, file_data: str, overwrite: bool = False, **kwargs):
-    if overwrite and os.path.exists(base_folder):
-        shutil.rmtree(base_folder)
-    os.makedirs(base_folder)
-    generator.generate_yolo_dataset(dataset, n_images, folder_images, folder_images, file_names, **kwargs)
-    generate_file_images(file_images_train, folder_images)
-    generate_file_data(file_data, dataset.n_classes, file_images_train, file_images_valid, file_names)
+def zip(version: Version):
+    print(f'zip version: {version.name}, from {version.version_folder}, to {version.file_zip}')
+    _zip(version.version_folder, version.file_zip)
 
-def upload(path):
-    print(f'upload {path}')
-    os.system(f'curl bashupload.com -T {path}')
+def unzip(version: Version):
+    print(f'unzip version: {version.name}, from {version.file_zip} to {version.version_folder}')
+    _unzip(version.file_zip, version.version_folder)
 
-def download(url, path):
-    print(f'download from {url} to {path}')
-    os.system(f'wget -c {url} -O {path}')
+def remove_zip(version: Version):
+    print(f'remove zip version: {version.name}, from {version.file_zip}')
+    _rm(version.file_zip)
 
-def zip(path, output_path):
-    print(f'zip {path} to {output_path}')
-    os.system(f'zip -q -r {output_path} {path}')
+def upload(version: Version):
+    print(f'upload version: {version.name}, from {version.file_zip}')
+    _bash_upload(version.file_zip)
 
-def unzip(path):
-    print(f'unzip {path}')
-    os.system(f'unzip -q {path}')
+def download(version: Version, url: str):
+    print(f'download version: {version.name}, from {url}, to {version.file_zip}')
+    _bash_download(url, version.file_zip)
 
-def rm(path):
-    print(f'remove {path}')
+def _remove_ext(file: str):
+    return os.path.splitext(file)[0]
+
+def _zip(folder: str, file: str):
+    os.makedirs(os.path.dirname(file), exist_ok=True)
+    shutil.make_archive(_remove_ext(file), 'zip', folder)
+
+def _unzip(file: str, folder: str):
+    os.makedirs(folder)
+    shutil.unpack_archive(file, folder, 'zip')
+
+def _rm(path: str):
     os.system(f'rm -rf {path}')
 
-class Version:
-    @property
-    def name(self):
-        raise NotImplementedError
+def _bash_upload(file: str):
+    os.system(f'curl bashupload.com -T {file}')
 
-    @property
-    def dataset(self):
-        raise NotImplementedError
-
-    @property
-    def root(self):
-        _root = 'data/'
-        os.makedirs(_root, exist_ok=True)
-        return _root
-
-    @cached_property
-    def base_folder(self):
-        return os.path.join(self.root, self.name)
-
-    @property
-    def file_zip(self):
-        return self.base_folder + '.zip'
+def _bash_download(url: str, file: str):
+    os.makedirs(os.path.dirname(file), exist_ok=True)
+    os.system(f'wget -c {url} -O {file}')
     
-    @property
-    def folder_images(self):
-        return os.path.join(self.base_folder, 'obj/')
-
-    @property
-    def folder_annotations(self):
-        return self.folder_images
-
-    @property
-    def file_images_train(self):
-        return os.path.join(self.base_folder, 'train.txt')
-
-    @property
-    def file_images_valid(self):
-        return os.path.join(self.base_folder, 'valid.txt')
-
-    @property
-    def file_names(self):
-        return os.path.join(self.base_folder, 'obj.names')
-
-    @property
-    def file_data(self):
-        return os.path.join(self.base_folder, 'obj.data')
-
-    def generate(self, overwrite: bool = False):
-        raise NotImplementedError
-
-class VersionValidPascalVOC2007(Version):
-    @property
-    def name(self):
-        return 'valid-pascal-voc-2007'
-
-    @property
-    def dataset(self):
-        return patchmentation.dataset.load(PASCAL_VOC_2007, categories='val')['val']
-
-    def generate(self, overwrite: bool = False):
-        generate_valid_dataset(self.dataset, self.base_folder, self.folder_images, self.file_names, self.file_images_valid, overwrite)
-
-class VersionTrainPascalVOC2007v1(Version):
-    @property
-    def name(self):
-        return 'train-pascal-voc-2007-v1'
-
-    @property
-    def dataset(self):
-        return patchmentation.dataset.load(PASCAL_VOC_2007, categories='train')['train']
-
-    def generate(self, overwrite: bool = False):
-        n_images = 25000
-        actions = [
-            filter.FilterWidth(50, Comparator.GreaterEqual),
-            filter.FilterHeight(50, Comparator.GreaterEqual),
-            transform.RandomResize(width_range=(50, 150), aspect_ratio=transform.Resize.AUTO_ASPECT_RATIO),
-        ]
-        max_n_patches = 10
-        generate_train_dataset(
-            self.dataset, n_images, self.base_folder, self.folder_images, self.file_names,
-            self.file_images_train, VersionValidPascalVOC2007().file_images_valid, self.file_data,
-            overwrite, actions=actions, max_n_patches=max_n_patches
-        )
-
-class VersionTrainPascalVOC2007v2(Version):
-    @property
-    def name(self):
-        return 'train-pascal-voc-2007-v2'
-
-    @property
-    def dataset(self):
-        return patchmentation.dataset.load(PASCAL_VOC_2007, categories='train')['train']
-
-    def generate(self, overwrite: bool = False):
-        n_images = 25000
-        actions = [
-            filter.FilterWidth(50, Comparator.GreaterEqual),
-            filter.FilterHeight(50, Comparator.GreaterEqual),
-            transform.RandomResize(width_range=(50, 150), aspect_ratio=transform.Resize.AUTO_ASPECT_RATIO),
-            filter.FilterWidth(30, Comparator.GreaterEqual),
-            filter.FilterHeight(30, Comparator.GreaterEqual),
-            transform.SoftEdge(13, 20)
-        ]
-        max_n_patches = 10
-        generate_train_dataset(
-            self.dataset, n_images, self.base_folder, self.folder_images, self.file_names,
-            self.file_images_train, VersionValidPascalVOC2007().file_images_valid, self.file_data,
-            overwrite, actions=actions, max_n_patches=max_n_patches
-        )
-
-class VersionTrainPascalVOC2007v3(Version):
-    @property
-    def name(self):
-        return 'train-pascal-voc-2007-v3'
-
-    @property
-    def dataset(self):
-        return patchmentation.dataset.load(PASCAL_VOC_2007, categories='train')['train']
-
-    def generate(self, overwrite: bool = False):
-        n_images = 25000
-        actions = [
-            filter.FilterWidth(50, Comparator.GreaterEqual),
-            filter.FilterHeight(50, Comparator.GreaterEqual),
-            transform.RandomResize(width_range=(50, 150), aspect_ratio=transform.Resize.AUTO_ASPECT_RATIO),
-        ]
-        max_n_patches = 20
-        visibility_threshold = 1.0
-        generate_train_dataset(
-            self.dataset, n_images, self.base_folder, self.folder_images, self.file_names,
-            self.file_images_train, VersionValidPascalVOC2007().file_images_valid, self.file_data,
-            overwrite, actions=actions, max_n_patches=max_n_patches, visibility_threshold=visibility_threshold
-        )
+def _validate_yolo(name: str, folder_images: str, folder_annotations: str, file_names: str):
+    dataset = loader.load_yolo_dataset(folder_images, folder_annotations, file_names)
+    print(f'{name}: {dataset}')
