@@ -36,7 +36,7 @@ class TrainPascalVoc2007v1(Version):
 
     def generate(self):
         dataset = self.dataset
-        n_images = 25
+        n_images = 25000
         actions = [
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
@@ -59,7 +59,7 @@ class TrainPascalVoc2007v2(Version):
 
     def generate(self):
         dataset = self.dataset
-        n_images = 20
+        n_images = 25000
         actions = [
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
@@ -85,7 +85,7 @@ class TrainPascalVoc2007v3(Version):
 
     def generate(self):
         dataset = self.dataset
-        n_images = 15
+        n_images = 25000
         actions = [
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
