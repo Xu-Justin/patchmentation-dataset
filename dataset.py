@@ -14,7 +14,7 @@ def get_args_parser():
     parser.add_argument('--unzip', action='store_true', help='unzip dataset')
     parser.add_argument('--remove-zip', action='store_true', help='remove zip dataset')
     parser.add_argument('--upload', action='store_true', help='upload dataset')
-    parser.add_argument('--download', type=str, default=None, help='download dataset')
+    parser.add_argument('--download', type=str, default=[], nargs='+', help='download dataset')
     parser.add_argument('--overwrite', action='store_true', help='overwrite existing dataset / zip')
     args = parser.parse_args()
     return args
@@ -42,7 +42,7 @@ def main(args):
         else:
             raise ValueError(f'version {args_version} not found.')
 
-    for version in versions:
+    for index, version in enumerate(versions):
         print(version.name)
 
         if args.generate:
@@ -61,11 +61,10 @@ def main(args):
         if args.remove_zip:
             utils.remove_zip(version)
 
-        if args.download is not None:
+        if len(args.download) > index:
             if args.overwrite:
                 utils.remove_zip(version)
-            utils.download(version, args.download)
-            args.download = None
+            utils.download(version, args.download[index])
 
         if args.unzip:
             if args.overwrite:
