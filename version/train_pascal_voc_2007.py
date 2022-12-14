@@ -21,7 +21,7 @@ class TrainPascalVoc2007tiny(Version):
 
     def generate(self):
         dataset = self.dataset
-        n_images = 100
+        n_images = 1000
         loader.save_yolo_names(dataset.classes, self.file_names)
         generator.generate(dataset, n_images, self.folder_images, self.folder_annotations)
 
@@ -36,7 +36,7 @@ class TrainPascalVoc2007v1(Version):
 
     def generate(self):
         dataset = self.dataset
-        n_images = 25000
+        n_images = 50000
         actions = [
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
@@ -59,7 +59,7 @@ class TrainPascalVoc2007v2(Version):
 
     def generate(self):
         dataset = self.dataset
-        n_images = 25000
+        n_images = 50000
         actions = [
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
@@ -85,7 +85,7 @@ class TrainPascalVoc2007v3(Version):
 
     def generate(self):
         dataset = self.dataset
-        n_images = 25000
+        n_images = 50000
         actions = [
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
