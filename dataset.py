@@ -26,6 +26,7 @@ def init_map_versions():
         map_versions[version.name] = version
     add_version(version.valid_pascal_voc_2007.ValidPascalVoc2007())
     add_version(version.test_pascal_voc_2007.TestPascalVoc2007())
+    add_version(version.train_pascal_voc_2007.TrainPascalVoc2007())
     add_version(version.train_pascal_voc_2007.TrainPascalVoc2007v1())
     add_version(version.train_pascal_voc_2007.TrainPascalVoc2007v2())
     add_version(version.train_pascal_voc_2007.TrainPascalVoc2007v3())

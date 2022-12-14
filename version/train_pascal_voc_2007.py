@@ -10,6 +10,18 @@ from patchmentation.utils import Comparator
 def pascal_voc_2007_train():
     return patchmentation.dataset.load_pascal_voc_2007('train')['train']
 
+class TrainPascalVoc2007(Version):
+    @property
+    def name(self):
+        return 'train-pascal-voc-2007'
+
+    @property
+    def dataset(self):
+        return pascal_voc_2007_train()
+
+    def generate(self):
+        loader.save_yolo_dataset(self.dataset, self.folder_images, self.folder_annotations, self.file_names)
+
 class TrainPascalVoc2007tiny(Version):
     @property
     def name(self):
