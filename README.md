@@ -2,33 +2,41 @@
 
 Dataset spesifications used to benchmark patch augmentation performance of [patchmentation](https://github.com/Xu-Justin/patchmentation).
 
-## Install Requirements
+## Quickstart
 
-Run the following commands to install the requirements.
+* Run the following commands to install the requirements.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Generate Dataset
-
-Run the following commands to generate the datasets.
+* Run the following commands to generate the dataset.
 
 ```bash
 python3 dataset.py --version [version] --generate
 ```
 
+## Arguments
+
+
+
 ## Dataset Spesification
 
 * **Training Dataset**
+
+  <details> <summary> <b> <code> train-pascal-voc-2007-tiny </code> </b> </summary>
+    
+    * Number of Images: 1,000
+    
+    * Source: Pascal VOC 2007 - Train
+  
+  </details>
   
   <details> <summary> <b> <code> train-pascal-voc-2007-v1 </code> </b> </summary>
     
-    * Number of Images: 25,000
+    * Number of Images: 50,000
     
     * Source: Pascal VOC 2007 - Train
-    
-    * Validation: `valid-pascal-voc-2007`
 
     * Actions
 
@@ -46,11 +54,9 @@ python3 dataset.py --version [version] --generate
 
   <details> <summary> <b> <code> train-pascal-voc-2007-v2 </code> </b> </summary>
     
-    * Number of images: 25,000
+    * Number of images: 50,000
     
     * Source: Pascal VOC 2007 - Train
-    
-    * Validation: `valid-pascal-voc-2007`
 
     * Actions
 
@@ -74,7 +80,7 @@ python3 dataset.py --version [version] --generate
 
     <details> <summary> <b> <code> train-pascal-voc-2007-v3 </code> </b> </summary>
     
-    * Number of images: 25,000
+    * Number of images: 50,000
     
     * Source: Pascal VOC 2007 - Train
     
@@ -103,5 +109,15 @@ python3 dataset.py --version [version] --generate
     * Number of Images: 2510
     
     * Source: Pascal VOC 2007 - Val
+      
+  </details>
+  
+* **Test Dataset**
+  
+  <details> <summary> <b> <code> test-pascal-voc-2007 </code> </b> </summary>
+    
+    * Number of Images: 4952
+    
+    * Source: Pascal VOC 2007 - Test
       
   </details>
