@@ -25,7 +25,7 @@ python3 dataset.py --version [version] --generate
 |     1    |  `--generate`  |    `store_true`   | Generate the dataset. If `overwrite` is true, it will remove the dataset (if exists) before generating.          |
 |     2    |     `--zip`    |    `store_true`   | Zip the dataset. If `overwrite` is true, it will remove the dataset zip (if exists) before zipping.              |
 |     3    |   `--upload`   |    `store_true`   | Upload the dataset zip.                                                                                          |
-|     4    | `--remove_zip` |    `store_true`   | Remove the dataset zip, if exists.                                                                               |
+|     4    | `--remove-zip` |    `store_true`   | Remove the dataset zip, if exists.                                                                               |
 |     5    |  `--download`  | one or more `url` | Download the dataset zip. If `overwrite` is true, it will remove the dataset zip (if exists) before downloading. |
 |     6    |    `--unzip`   |    `store_true`   | Unzip the dataset zip. If `overwrite` is true, it will remove the dataset (if exists) before unzipping.          |
 |     7    |  `--validate`  |    `store_true`   | Validate the dataset.                                                                                            |
