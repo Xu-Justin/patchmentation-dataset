@@ -1,4 +1,4 @@
-# patchmentation-benchmarking
+# Patchmentation Dataset
 
 This datasets are used to benchmark patch augmentation performance of [patchmentation](https://github.com/Xu-Justin/patchmentation).
 
