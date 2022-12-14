@@ -134,3 +134,7 @@ python3 dataset.py --version [version] --generate
     * Source: Pascal VOC 2007 - Test
       
   </details>
+
+---
+
+This project was developed as part of thesis project, Computer Science, BINUS University.
