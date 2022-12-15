@@ -4,7 +4,7 @@ import patchmentation
 from patchmentation.utils import loader
 
 def pascal_voc_2007_test():
-    return patchmentation.dataset.load_pascal_voc_2007('test')['test']
+    return patchmentation.data.PascalVOC2007().load('test')
 
 class TestPascalVoc2007(Version):
     @property

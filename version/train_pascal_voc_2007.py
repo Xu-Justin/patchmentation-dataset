@@ -8,7 +8,7 @@ from patchmentation.utils import filter
 from patchmentation.utils import Comparator
 
 def pascal_voc_2007_train():
-    return patchmentation.dataset.load_pascal_voc_2007('train')['train']
+    return patchmentation.data.PascalVOC2007().load('train')
 
 class TrainPascalVoc2007(Version):
     @property

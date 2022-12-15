@@ -4,7 +4,7 @@ import patchmentation
 from patchmentation.utils import loader
 
 def pascal_voc_2007_val():
-    return patchmentation.dataset.load_pascal_voc_2007('val')['val']
+    return patchmentation.data.PascalVOC2007().load('val')
 
 class ValidPascalVoc2007(Version):
     @property
