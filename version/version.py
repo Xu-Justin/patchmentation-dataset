@@ -20,21 +20,21 @@ class Version:
     def version_folder(self):
         return os.path.join(self.root, self.name)
 
+    def version_folder_batch(self, batch: int):
+        return os.path.join(self.version_folder, str(batch).zfill(3))
+
     @property
     def file_zip(self):
         return self.version_folder + '.zip'
     
-    @property
-    def folder_images(self):
-        return os.path.join(self.version_folder, 'images/')
+    def folder_images(self, batch: int):
+        return os.path.join(self.version_folder_batch(batch), 'images/')
 
-    @property
-    def folder_annotations(self):
-        return os.path.join(self.version_folder, 'labels/')
+    def folder_annotations(self, batch: int):
+        return os.path.join(self.version_folder_batch(batch), 'labels/')
 
-    @property
-    def file_names(self):
-        return os.path.join(self.version_folder, 'obj.names')
+    def file_names(self, batch: int):
+        return os.path.join(self.version_folder_batch(batch), 'obj.names')
 
-    def generate(self):
+    def generate(self, batch: int):
         raise NotImplementedError

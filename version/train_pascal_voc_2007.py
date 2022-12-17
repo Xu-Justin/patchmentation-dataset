@@ -19,8 +19,9 @@ class TrainPascalVoc2007(Version):
     def dataset(self):
         return pascal_voc_2007_train()
 
-    def generate(self):
-        loader.save_yolo_dataset(self.dataset, self.folder_images, self.folder_annotations, self.file_names)
+    def generate(self, batch: int):
+        for i in range(batch):
+            loader.save_yolo_dataset(self.dataset, self.folder_images(i), self.folder_annotations(i), self.file_names(i), version_folder_batch=self.version_folder_batch(i))
 
 class TrainPascalVoc2007tiny(Version):
     @property
@@ -31,11 +32,12 @@ class TrainPascalVoc2007tiny(Version):
     def dataset(self):
         return pascal_voc_2007_train()
 
-    def generate(self):
+    def generate(self, batch: int):
         dataset = self.dataset
-        n_images = 1000
-        loader.save_yolo_names(dataset.classes, self.file_names)
-        generator.generate(dataset, n_images, self.folder_images, self.folder_annotations)
+        n_images = 200
+        for i in range(batch):
+            loader.save_yolo_names(dataset.classes, self.file_names(i))
+            generator.generate(dataset, n_images, self.folder_images(i), self.folder_annotations(i), version_folder_batch=self.version_folder_batch(i))
 
 class TrainPascalVoc2007v1(Version):
     @property
@@ -46,9 +48,9 @@ class TrainPascalVoc2007v1(Version):
     def dataset(self):
         return pascal_voc_2007_train()
 
-    def generate(self):
+    def generate(self, batch: int):
         dataset = self.dataset
-        n_images = 50000
+        n_images = 2500
         actions = [
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
@@ -57,8 +59,9 @@ class TrainPascalVoc2007v1(Version):
         kwargs = {
             'max_n_patches' : 10,
         }
-        loader.save_yolo_names(dataset.classes, self.file_names)
-        generator.generate(dataset, n_images, self.folder_images, self.folder_annotations, actions=actions, **kwargs)
+        for i in range(batch):
+            loader.save_yolo_names(dataset.classes, self.file_names(i))
+            generator.generate(dataset, n_images, self.folder_images(i), self.folder_annotations(i), actions=actions, **kwargs, version_folder_batch=self.version_folder_batch(i))
 
 class TrainPascalVoc2007v2(Version):
     @property
@@ -69,9 +72,9 @@ class TrainPascalVoc2007v2(Version):
     def dataset(self):
         return pascal_voc_2007_train()
 
-    def generate(self):
+    def generate(self, batch: int):
         dataset = self.dataset
-        n_images = 50000
+        n_images = 2500
         actions = [
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
@@ -83,8 +86,9 @@ class TrainPascalVoc2007v2(Version):
         kwargs = {
             'max_n_patches' : 10,
         }
-        loader.save_yolo_names(dataset.classes, self.file_names)
-        generator.generate(dataset, n_images, self.folder_images, self.folder_annotations, actions=actions, **kwargs)
+        for i in range(batch):
+            loader.save_yolo_names(dataset.classes, self.file_names(i))
+            generator.generate(dataset, n_images, self.folder_images(i), self.folder_annotations(i), actions=actions, **kwargs, version_folder_batch=self.version_folder_batch(i))
 
 class TrainPascalVoc2007v3(Version):
     @property
@@ -95,9 +99,9 @@ class TrainPascalVoc2007v3(Version):
     def dataset(self):
         return pascal_voc_2007_train()
 
-    def generate(self):
+    def generate(self, batch: int):
         dataset = self.dataset
-        n_images = 50000
+        n_images = 2500
         actions = [
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
@@ -107,5 +111,6 @@ class TrainPascalVoc2007v3(Version):
             'max_n_patches' : 10,
             'visibility_threshold': 1.0
         }
-        loader.save_yolo_names(dataset.classes, self.file_names)
-        generator.generate(dataset, n_images, self.folder_images, self.folder_annotations, actions=actions, **kwargs)
+        for i in range(batch):
+            loader.save_yolo_names(dataset.classes, self.file_names(i))
+            generator.generate(dataset, n_images, self.folder_images(i), self.folder_annotations(i), actions=actions, **kwargs, version_folder_batch=self.version_folder_batch(i))

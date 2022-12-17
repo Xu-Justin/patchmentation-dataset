@@ -16,6 +16,7 @@ def get_args_parser():
     parser.add_argument('--upload', action='store_true', help='upload dataset')
     parser.add_argument('--download', type=str, default=[], nargs='+', help='download dataset')
     parser.add_argument('--overwrite', action='store_true', help='overwrite existing dataset / zip')
+    parser.add_argument('--batch', type=int, default=1, help='number of batch to be generated')
     args = parser.parse_args()
     return args
 
@@ -49,7 +50,7 @@ def main(args):
         if args.generate:
             if args.overwrite:
                 utils.remove(version)
-            utils.generate(version)
+            utils.generate(version, args.batch)
 
         if args.zip:
             if args.overwrite:

@@ -6,12 +6,17 @@ import os
 import random
 from tqdm import tqdm
 
-def generate(dataset: Dataset, n_images: int, folder_images: str, folder_annotations: str, **kwargs):
+def generate(dataset: Dataset, n_images: int, folder_images: str, folder_annotations: str, version_folder_batch: str = None, **kwargs):
     patches = []
     for image_patch in dataset.image_patches:
         patches += image_patch.patches
+    
+    if version_folder_batch is not None:
+        desc = f'generate - {version_folder_batch}'
+    else:
+        desc = f'generate'
 
-    for i in tqdm(range(n_images), desc='generate'):
+    for i in tqdm(range(n_images), desc=desc):
         image = random.choice(dataset.image_patches)
         result = patch_augmentation(patches, image, **kwargs)
         file_image = os.path.join(folder_images, f'{i}.jpg')

@@ -15,6 +15,7 @@ class ValidPascalVoc2007(Version):
     def dataset(self):
         return pascal_voc_2007_val()
 
-    def generate(self):
-        loader.save_yolo_dataset(self.dataset, self.folder_images, self.folder_annotations, self.file_names)
+    def generate(self, batch: int):
+        for i in range(batch):
+            loader.save_yolo_dataset(self.dataset, self.folder_images(i), self.folder_annotations(i), self.file_names(i), version_folder_batch=self.version_folder_batch(i))
         

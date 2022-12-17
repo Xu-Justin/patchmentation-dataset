@@ -1,14 +1,20 @@
 from version import Version
 from patchmentation.utils import loader
+from typing import List
 import os, shutil
+import filecmp
 
-def generate(version: Version):
-    print(f'generate version: {version.name}, to {version.version_folder}')
-    version.generate()
+def generate(version: Version, batch: int):
+    print(f'generate version: {version.name} with batch: {batch}, to {version.version_folder}')
+    version.generate(batch)
 
 def validate(version: Version):
     print(f'validate version: {version.name}, from {version.version_folder}')
-    _validate_yolo(version.name, version.folder_images, version.folder_annotations, version.file_names)
+    list_file_names = []
+    for i in range(len(os.listdir(version.version_folder))):
+        _validate_yolo(version.name, version.folder_images(i), version.folder_annotations(i), version.file_names(i), i)
+        list_file_names.append(version.file_names(i))
+    _validate_yolo_file_names(list_file_names)
 
 def remove(version: Version):
     print(f'remove version: {version.name}, from {version.version_folder}')
@@ -55,6 +61,10 @@ def _bash_download(url: str, file: str):
     os.makedirs(os.path.dirname(file), exist_ok=True)
     os.system(f'wget -c {url} -O {file}')
     
-def _validate_yolo(name: str, folder_images: str, folder_annotations: str, file_names: str):
+def _validate_yolo(name: str, folder_images: str, folder_annotations: str, file_names: str, batch: int):
     dataset = loader.load_yolo_dataset(folder_images, folder_annotations, file_names)
-    print(f'{name}: {dataset}')
+    print(f'{name} - {batch}: {dataset}')
+
+def _validate_yolo_file_names(list_file_names: List[str]):
+    for i in range(1, len(list_file_names)):
+        assert filecmp.cmp(list_file_names[0], list_file_names[i]), f'file_names not equal between {list_file_names[0]} and {list_file_names[i]}'
