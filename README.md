@@ -22,6 +22,7 @@ python3 dataset.py --version [version] --generate
 |:--------:|:--------------:|:-----------------:|------------------------------------------------------------------------------------------------------------------|
 |     -    |   `--version`  | one or more `str` | Dataset version(s).                                                                                              |
 |     -    |  `--overwrite` |    `store_true`   | Overwrite existing dataset / zip.                                                                                |
+|     -    |    `--batch`   |       `int`       | Number of batch to generate (default=`1`)                                                                        |
 |     1    |  `--generate`  |    `store_true`   | Generate the dataset. If `overwrite` is true, it will remove the dataset (if exists) before generating.          |
 |     2    |     `--zip`    |    `store_true`   | Zip the dataset. If `overwrite` is true, it will remove the dataset zip (if exists) before zipping.              |
 |     3    |   `--upload`   |    `store_true`   | Upload the dataset zip.                                                                                          |
@@ -39,7 +40,7 @@ python3 dataset.py --version [version] --generate
 
   <details> <summary> <b> <code> train-pascal-voc-2007-tiny </code> </b> </summary>
     
-    * Number of Images: 1,000
+    * Number of Images: 200
     
     * Source: Pascal VOC 2007 - Train
   
@@ -47,7 +48,7 @@ python3 dataset.py --version [version] --generate
   
   <details> <summary> <b> <code> train-pascal-voc-2007-v1 </code> </b> </summary>
     
-    * Number of Images: 50,000
+    * Number of Images: 2,500
     
     * Source: Pascal VOC 2007 - Train
 
@@ -67,7 +68,7 @@ python3 dataset.py --version [version] --generate
 
   <details> <summary> <b> <code> train-pascal-voc-2007-v2 </code> </b> </summary>
     
-    * Number of images: 50,000
+    * Number of images: 2,500
     
     * Source: Pascal VOC 2007 - Train
 
@@ -93,11 +94,9 @@ python3 dataset.py --version [version] --generate
 
     <details> <summary> <b> <code> train-pascal-voc-2007-v3 </code> </b> </summary>
     
-    * Number of images: 50,000
+    * Number of images: 2,500
     
     * Source: Pascal VOC 2007 - Train
-    
-    * Validation: `valid-pascal-voc-2007`
 
     * Actions
 
