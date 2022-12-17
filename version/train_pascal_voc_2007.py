@@ -21,7 +21,7 @@ class TrainPascalVoc2007(Version):
 
     def generate(self, batch: int):
         for i in range(batch):
-            loader.save_yolo_dataset(self.dataset, self.folder_images(i), self.folder_annotations(i), self.file_names(i), version_folder_batch=self.version_folder_batch(i))
+            loader.save_yolo_dataset(self.dataset, self.folder_images(i), self.folder_annotations(i), self.file_names(i))
 
 class TrainPascalVoc2007tiny(Version):
     @property
