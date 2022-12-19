@@ -38,9 +38,21 @@ python3 dataset.py --version [version] --generate
 
 * **Training Dataset**
 
+  <details> <summary> <b> <code> train-pascal-voc-2007 </code> </b> </summary>
+    
+    * Number of Images: 2501
+    
+    * Number of Classes: 20
+    
+    * Source: Pascal VOC 2007 - Train
+      
+  </details>
+
   <details> <summary> <b> <code> train-pascal-voc-2007-tiny </code> </b> </summary>
     
     * Number of Images: 200
+    
+    * Number of Classes: 20
     
     * Source: Pascal VOC 2007 - Train
   
@@ -49,6 +61,8 @@ python3 dataset.py --version [version] --generate
   <details> <summary> <b> <code> train-pascal-voc-2007-v1 </code> </b> </summary>
     
     * Number of Images: 2,500
+    
+    * Number of Classes: 20
     
     * Source: Pascal VOC 2007 - Train
 
@@ -69,6 +83,8 @@ python3 dataset.py --version [version] --generate
   <details> <summary> <b> <code> train-pascal-voc-2007-v2 </code> </b> </summary>
     
     * Number of images: 2,500
+    
+    * Number of Classes: 20
     
     * Source: Pascal VOC 2007 - Train
 
@@ -98,6 +114,8 @@ python3 dataset.py --version [version] --generate
     
     * Number of images: 2,500
     
+    * Number of Classes: 20
+    
     * Source: Pascal VOC 2007 - Train
 
     * Actions
@@ -122,6 +140,8 @@ python3 dataset.py --version [version] --generate
     
     * Number of Images: 2510
     
+    * Number of Classes: 20
+    
     * Source: Pascal VOC 2007 - Val
       
   </details>
@@ -131,6 +151,8 @@ python3 dataset.py --version [version] --generate
   <details> <summary> <b> <code> test-pascal-voc-2007 </code> </b> </summary>
     
     * Number of Images: 4952
+    
+    * Number of Classes: 20
     
     * Source: Pascal VOC 2007 - Test
       
