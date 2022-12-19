@@ -18,19 +18,19 @@ python3 dataset.py --version [version] --generate
 
 ## Arguments
 
-| Priority |    Arguments   |        Type       | Description                                                                                                      |
-|:--------:|:--------------:|:-----------------:|------------------------------------------------------------------------------------------------------------------|
-|     -    |   `--version`  | one or more `str` | Dataset version(s).                                                                                              |
-|     -    |  `--overwrite` |    `store_true`   | Overwrite existing dataset / zip.                                                                                |
-|     -    |    `--batch`   |       `int`       | Number of batch to generate (default=`1`)                                                                        |
-|     1    |  `--generate`  |    `store_true`   | Generate the dataset. If `overwrite` is true, it will remove the dataset (if exists) before generating.          |
-|     2    |     `--zip`    |    `store_true`   | Zip the dataset. If `overwrite` is true, it will remove the dataset zip (if exists) before zipping.              |
-|     3    |   `--upload`   |    `store_true`   | Upload the dataset zip.                                                                                          |
-|     4    | `--remove-zip` |    `store_true`   | Remove the dataset zip, if exists.                                                                               |
-|     5    |  `--download`  | one or more `url` | Download the dataset zip. If `overwrite` is true, it will remove the dataset zip (if exists) before downloading. |
-|     6    |    `--unzip`   |    `store_true`   | Unzip the dataset zip. If `overwrite` is true, it will remove the dataset (if exists) before unzipping.          |
-|     7    |  `--validate`  |    `store_true`   | Validate the dataset.                                                                                            |
-|     8    |   `--remove`   |    `store_true`   | Remove the dataset, if exists.                                                                                   |
+| Priority* |    Arguments   |        Type       | Description                                                                                                      |
+|:---------:|:--------------:|:-----------------:|------------------------------------------------------------------------------------------------------------------|
+|     -     |   `--version`  | one or more `str` | Dataset version(s).                                                                                              |
+|     -     |  `--overwrite` |    `store_true`   | Overwrite existing dataset / zip.                                                                                |
+|     -     |    `--batch`   |       `int`       | Number of batch to generate (default=`1`)                                                                        |
+|     1     |  `--generate`  |    `store_true`   | Generate the dataset. If `overwrite` is true, it will remove the dataset (if exists) before generating.          |
+|     2     |     `--zip`    |    `store_true`   | Zip the dataset. If `overwrite` is true, it will remove the dataset zip (if exists) before zipping.              |
+|     3     |   `--upload`   |    `store_true`   | Upload the dataset zip.                                                                                          |
+|     4     | `--remove-zip` |    `store_true`   | Remove the dataset zip, if exists.                                                                               |
+|     5     |  `--download`  | one or more `url` | Download the dataset zip. If `overwrite` is true, it will remove the dataset zip (if exists) before downloading. |
+|     6     |    `--unzip`   |    `store_true`   | Unzip the dataset zip. If `overwrite` is true, it will remove the dataset (if exists) before unzipping.          |
+|     7     |  `--validate`  |    `store_true`   | Validate the dataset.                                                                                            |
+|     8     |   `--remove`   |    `store_true`   | Remove the dataset, if exists.                                                                                   |
 
 **Smaller priority number will be executed first*
 
