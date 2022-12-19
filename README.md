@@ -130,7 +130,10 @@ python3 dataset.py --version [version] --generate
 
       * `max_n_patches = 20`
 
-      * `visibility_threshold = 1.0`
+      * `visibility_threshold = 0.8`
+      
+      * `ratio_negative_patch = 5.0`
+      
   
   </details>
   
