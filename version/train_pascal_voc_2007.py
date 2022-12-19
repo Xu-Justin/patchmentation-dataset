@@ -111,7 +111,7 @@ class TrainPascalVoc2007v3(Version):
 
     def generate(self, batch: int):
         dataset = self.dataset
-        n_images = 250
+        n_images = 2500
         actions = [
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
