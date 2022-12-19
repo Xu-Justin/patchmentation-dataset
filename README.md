@@ -88,7 +88,9 @@ python3 dataset.py --version [version] --generate
 
     * Kwargs
 
-      * `max_n_patches = 10`
+      * `max_n_patches = 20`
+
+      * `visibility_threshold = 1.0`
   
   </details>
 

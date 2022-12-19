@@ -84,7 +84,8 @@ class TrainPascalVoc2007v2(Version):
             transform.SoftEdge(13, 20)
         ]
         kwargs = {
-            'max_n_patches' : 10,
+            'max_n_patches' : 20,
+            'visibility_threshold': 1.0
         }
         for i in range(batch):
             loader.save_yolo_names(dataset.classes, self.file_names(i))
