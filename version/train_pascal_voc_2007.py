@@ -111,7 +111,7 @@ class TrainPascalVoc2007v3(Version):
 
     def generate(self, batch: int):
         dataset = self.dataset
-        n_images = 2500
+        n_images = 250
         actions = [
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
@@ -120,7 +120,8 @@ class TrainPascalVoc2007v3(Version):
         kwargs = {
             'max_n_patches' : 20,
             'visibility_threshold': 0.8,
-            'ratio_negative_patch': 5.0
+            'ratio_negative_patch': 5.0,
+            'iou_negative_patch': 0.2
         }
         for i in range(batch):
             if os.path.exists(self.version_folder_batch(i)):

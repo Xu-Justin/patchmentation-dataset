@@ -1,21 +1,37 @@
 from patchmentation.collections import Dataset
 from patchmentation.utils import functional as F
 from patchmentation.utils import loader
+from patchmentation.utils import converter
 from patchmentation import patch_augmentation
 
 import os
 import random
 from tqdm import tqdm
 
-def generate(dataset: Dataset, n_images: int, folder_images: str, folder_annotations: str, version_folder_batch: str = None, ratio_negative_patch: float = 0, **kwargs):
-    patches = []
+def generate(
+        dataset: Dataset, 
+        n_images: int, 
+        folder_images: str, 
+        folder_annotations: str, 
+        version_folder_batch: str = None, 
+        ratio_patch: float = 1, 
+        ratio_negative_patch: float = 0, 
+        iou_negative_patch: float = 0.0,
+        **kwargs
+    ):
+    dataset_patches = []
     for image_patch in dataset.image_patches:
-        patches += image_patch.patches
+        dataset_patches += image_patch.patches
+
+    patches = []
+    while len(patches) < int(len(dataset_patches) * ratio_patch):
+        patch = random.choice(dataset_patches)
+        patches.append(patch)
 
     negative_patches = []
-    while len(negative_patches) < int(len(patches) * ratio_negative_patch):
+    while len(negative_patches) < int(len(dataset_patches) * ratio_negative_patch):
         image = random.choice(dataset.image_patches)
-        negative_patch = F.get_negative_patch(image, 0.0)
+        negative_patch = F.get_negative_patch(image, iou_negative_patch)
         if negative_patch is not None:
             negative_patches.append(negative_patch)
     

@@ -134,6 +134,7 @@ python3 dataset.py --version [version] --generate
       
       * `ratio_negative_patch = 5.0`
       
+      * `iou_negative_patch = 0.2`
   
   </details>
   
