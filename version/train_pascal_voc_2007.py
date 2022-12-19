@@ -118,8 +118,9 @@ class TrainPascalVoc2007v3(Version):
             transform.RandomResize(width_range=(50, 150), aspect_ratio=transform.Resize.AUTO_ASPECT_RATIO)
         ]
         kwargs = {
-            'max_n_patches' : 10,
-            'visibility_threshold': 1.0
+            'max_n_patches' : 20,
+            'visibility_threshold': 0.8,
+            'ratio_negative_patch': 5.0
         }
         for i in range(batch):
             if os.path.exists(self.version_folder_batch(i)):
