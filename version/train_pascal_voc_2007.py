@@ -1,6 +1,7 @@
 from .version import Version
 from . import generator
 
+import os
 import patchmentation
 from patchmentation.utils import loader
 from patchmentation.utils import transform
@@ -21,6 +22,8 @@ class TrainPascalVoc2007(Version):
 
     def generate(self, batch: int):
         for i in range(batch):
+            if os.path.exists(self.version_folder_batch(i)):
+                continue
             loader.save_yolo_dataset(self.dataset, self.folder_images(i), self.folder_annotations(i), self.file_names(i))
 
 class TrainPascalVoc2007tiny(Version):
@@ -36,6 +39,8 @@ class TrainPascalVoc2007tiny(Version):
         dataset = self.dataset
         n_images = 200
         for i in range(batch):
+            if os.path.exists(self.version_folder_batch(i)):
+                continue
             loader.save_yolo_names(dataset.classes, self.file_names(i))
             generator.generate(dataset, n_images, self.folder_images(i), self.folder_annotations(i), version_folder_batch=self.version_folder_batch(i))
 
@@ -60,6 +65,8 @@ class TrainPascalVoc2007v1(Version):
             'max_n_patches' : 10,
         }
         for i in range(batch):
+            if os.path.exists(self.version_folder_batch(i)):
+                continue
             loader.save_yolo_names(dataset.classes, self.file_names(i))
             generator.generate(dataset, n_images, self.folder_images(i), self.folder_annotations(i), actions=actions, **kwargs, version_folder_batch=self.version_folder_batch(i))
 
@@ -88,6 +95,8 @@ class TrainPascalVoc2007v2(Version):
             'visibility_threshold': 1.0
         }
         for i in range(batch):
+            if os.path.exists(self.version_folder_batch(i)):
+                continue
             loader.save_yolo_names(dataset.classes, self.file_names(i))
             generator.generate(dataset, n_images, self.folder_images(i), self.folder_annotations(i), actions=actions, **kwargs, version_folder_batch=self.version_folder_batch(i))
 
@@ -113,5 +122,7 @@ class TrainPascalVoc2007v3(Version):
             'visibility_threshold': 1.0
         }
         for i in range(batch):
+            if os.path.exists(self.version_folder_batch(i)):
+                continue
             loader.save_yolo_names(dataset.classes, self.file_names(i))
             generator.generate(dataset, n_images, self.folder_images(i), self.folder_annotations(i), actions=actions, **kwargs, version_folder_batch=self.version_folder_batch(i))
