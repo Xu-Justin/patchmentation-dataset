@@ -31,6 +31,7 @@ def init_map_versions():
     add_version(version.train_pascal_voc_2007.TrainPascalVoc2007v1())
     add_version(version.train_pascal_voc_2007.TrainPascalVoc2007v2())
     add_version(version.train_pascal_voc_2007.TrainPascalVoc2007v3())
+    add_version(version.train_pascal_voc_2007.TrainPascalVoc2007v4())
     add_version(version.train_pascal_voc_2007.TrainPascalVoc2007tiny())
 
 def main(args):
