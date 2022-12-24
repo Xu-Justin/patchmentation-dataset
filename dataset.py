@@ -33,6 +33,8 @@ def init_map_versions():
     add_version(version.train_pascal_voc_2007.TrainPascalVoc2007v3())
     add_version(version.train_pascal_voc_2007.TrainPascalVoc2007v4())
     add_version(version.train_pascal_voc_2007.TrainPascalVoc2007tiny())
+    add_version(version.penn_fudan_ped.TrainPennFudanPedPerson())
+    add_version(version.penn_fudan_ped.ValidPennFudanPedPerson())
 
 def main(args):
     init_map_versions()
