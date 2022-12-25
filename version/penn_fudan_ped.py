@@ -134,9 +134,11 @@ class TrainMallDataset(Version):
             'visibility_threshold': 0.8,
             'patch_distribution': self.patch_distribution
         }
+        image = self.image
+        patches = self.patches
         for i in range(batch):
             if os.path.exists(self.version_folder_batch(i)):
                 continue
             loader.save_yolo_names(self.classes, self.file_names(i))
-            generator.generateV2(self.image, self.patches, self.classes, n_images, self.folder_images(i), self.folder_annotations(i), actions=actions, **kwargs, version_folder_batch=self.version_folder_batch(i))
+            generator.generateV2(image, patches, self.classes, n_images, self.folder_images(i), self.folder_annotations(i), actions=actions, **kwargs, version_folder_batch=self.version_folder_batch(i))
             
