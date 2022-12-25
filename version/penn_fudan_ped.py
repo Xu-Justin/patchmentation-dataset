@@ -1,9 +1,13 @@
 from .version import Version
+from . import generator
 
 import os
 import patchmentation
-from patchmentation.collections import Dataset
+from patchmentation.collections import Dataset, ImagePatch, Patch, Image, Mask
 from patchmentation.utils import loader
+from patchmentation.utils import transform
+from patchmentation.utils import filter
+from patchmentation.utils import Comparator
 
 train_file_names = ['PennPed00059.png', 'FudanPed00044.png', 'PennPed00091.png', 'FudanPed00064.png', 'FudanPed00010.png', 
     'PennPed00017.png', 'FudanPed00068.png', 'FudanPed00061.png', 'FudanPed00047.png', 'PennPed00072.png', 'FudanPed00025.png', 
@@ -88,3 +92,51 @@ class ValidPennFudanPedPerson(Version):
             if os.path.exists(self.version_folder_batch(i)):
                 continue
             loader.save_yolo_dataset(self.dataset, self.folder_images(i), self.folder_annotations(i), self.file_names(i))
+
+class TrainMallDataset(Version):
+    @property
+    def name(self):
+        return 'train-mall-dataset'
+
+    @property
+    def image(self):
+        image = Image('dataset/train-mall-dataset/seq_000001.jpg')
+        patches = loader.load_yolo_patches(image, 'dataset/train-mall-dataset/seq_000001.txt', self.classes)
+        return ImagePatch(image, patches)
+
+    @property
+    def patch_distribution(self):
+        return Mask('dataset/train-mall-dataset/seq_000001_mask.jpg')
+
+    @property
+    def classes(self):
+        return ['person']
+
+    @property
+    def patches(self):
+        patches = []
+        for image_patch in penn_fudan_ped_person_train().image_patches:
+            patches += image_patch.patches
+        return patches
+
+    def generate(self, batch: int):
+        n_images = 1000
+        actions = [
+            filter.FilterWidth(20, Comparator.GreaterEqual),
+            filter.FilterHeight(20, Comparator.GreaterEqual),
+            transform.RandomResize(width_range=(20, 40), aspect_ratio=transform.Resize.AUTO_ASPECT_RATIO),
+            filter.FilterWidth(15, Comparator.GreaterEqual),
+            filter.FilterHeight(15, Comparator.GreaterEqual),
+            transform.SoftEdge(5, 10)
+        ]
+        kwargs = {
+            'max_n_patches' : 30,
+            'visibility_threshold': 0.8,
+            'patch_distribution': self.patch_distribution
+        }
+        for i in range(batch):
+            if os.path.exists(self.version_folder_batch(i)):
+                continue
+            loader.save_yolo_names(self.classes, self.file_names(i))
+            generator.generateV2(self.image, self.patches, self.classes, n_images, self.folder_images(i), self.folder_annotations(i), actions=actions, **kwargs, version_folder_batch=self.version_folder_batch(i))
+            
