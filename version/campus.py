@@ -74,4 +74,51 @@ class TrainCampus(Version):
             loader.save_yolo_names(self.classes, self.file_names(i))
             background_image, distribution = random.choice(background_images_with_distribution)
             generator.generateV2(background_image, patches, self.classes, n_images, self.folder_images(i), self.folder_annotations(i), actions=actions, patch_distribution=distribution, **kwargs, version_folder_batch=self.version_folder_batch(i))
-            
+
+class ValidCampus(Version):
+    @property
+    def name(self):
+        return 'valid-campus'
+
+    @property
+    def dataset(self):
+        image_patches: List[ImagePatch] = []
+        image_patches += patchmentation.data.campus.Garden1.IP1().load().image_patches[1:64]
+        image_patches += patchmentation.data.campus.Garden1.Contour2().load().image_patches[1:64]
+        image_patches += patchmentation.data.campus.Garden1.HC2().load().image_patches[1:64]
+        image_patches += patchmentation.data.campus.Garden1.HC3().load().image_patches[1:64]
+        for image_patch in image_patches:
+            for patch in image_patch.patches:
+                patch.class_name = 'person'
+        return Dataset(image_patches)
+    
+    def generate(self, batch: int):
+        dataset = self.dataset
+        for i in range(batch):
+            if os.path.exists(self.version_folder_batch(i)):
+                continue
+            loader.save_yolo_dataset(dataset, self.folder_images(i), self.folder_annotations(i), self.file_names(i))
+
+class TestCampus(Version):
+    @property
+    def name(self):
+        return 'test-campus'
+
+    @property
+    def dataset(self):
+        image_patches: List[ImagePatch] = []
+        image_patches += patchmentation.data.campus.Garden1.IP1().load().image_patches[64:]
+        image_patches += patchmentation.data.campus.Garden1.Contour2().load().image_patches[64:]
+        image_patches += patchmentation.data.campus.Garden1.HC2().load().image_patches[64:]
+        image_patches += patchmentation.data.campus.Garden1.HC3().load().image_patches[64:]
+        for image_patch in image_patches:
+            for patch in image_patch.patches:
+                patch.class_name = 'person'
+        return Dataset(image_patches)
+    
+    def generate(self, batch: int):
+        dataset = self.dataset
+        for i in range(batch):
+            if os.path.exists(self.version_folder_batch(i)):
+                continue
+            loader.save_yolo_dataset(dataset, self.folder_images(i), self.folder_annotations(i), self.file_names(i))
