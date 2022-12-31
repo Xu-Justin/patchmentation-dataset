@@ -36,6 +36,8 @@ def init_map_versions():
     add_version(version.penn_fudan_ped.TrainPennFudanPedPerson())
     add_version(version.penn_fudan_ped.ValidPennFudanPedPerson())
     add_version(version.campus.TrainCampus())
+    add_version(version.campus.ValidCampus())
+    add_version(version.campus.TestCampus())
 
 def main(args):
     init_map_versions()
