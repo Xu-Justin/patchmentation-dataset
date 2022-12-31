@@ -160,3 +160,41 @@ class TrainPascalVoc2007v4(Version):
                 continue
             loader.save_yolo_names(dataset.classes, self.file_names(i))
             generator.generate(dataset, n_images, self.folder_images(i), self.folder_annotations(i), actions=actions, **kwargs, version_folder_batch=self.version_folder_batch(i))
+
+def pascal_voc_2007_val():
+    return patchmentation.data.PascalVOC2007().load('val')
+
+class ValidPascalVoc2007(Version):
+    @property
+    def name(self):
+        return 'valid-pascal-voc-2007'
+
+    @property
+    def dataset(self):
+        return pascal_voc_2007_val()
+
+    def generate(self, batch: int):
+        dataset = self.dataset
+        for i in range(batch):
+            if os.path.exists(self.version_folder_batch(i)):
+                continue
+            loader.save_yolo_dataset(dataset, self.folder_images(i), self.folder_annotations(i), self.file_names(i))
+
+def pascal_voc_2007_test():
+    return patchmentation.data.PascalVOC2007().load('test')
+
+class TestPascalVoc2007(Version):
+    @property
+    def name(self):
+        return 'test-pascal-voc-2007'
+
+    @property
+    def dataset(self):
+        return pascal_voc_2007_test()
+
+    def generate(self, batch: int):
+        dataset = self.dataset
+        for i in range(batch):
+            if os.path.exists(self.version_folder_batch(i)):
+                continue
+            loader.save_yolo_dataset(dataset, self.folder_images(i), self.folder_annotations(i), self.file_names(i))

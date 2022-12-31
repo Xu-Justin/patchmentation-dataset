@@ -25,14 +25,14 @@ map_versions = {}
 def init_map_versions():
     def add_version(version: Version):
         map_versions[version.name] = version
-    add_version(version.valid_pascal_voc_2007.ValidPascalVoc2007())
-    add_version(version.test_pascal_voc_2007.TestPascalVoc2007())
-    add_version(version.train_pascal_voc_2007.TrainPascalVoc2007())
-    add_version(version.train_pascal_voc_2007.TrainPascalVoc2007v1())
-    add_version(version.train_pascal_voc_2007.TrainPascalVoc2007v2())
-    add_version(version.train_pascal_voc_2007.TrainPascalVoc2007v3())
-    add_version(version.train_pascal_voc_2007.TrainPascalVoc2007v4())
-    add_version(version.train_pascal_voc_2007.TrainPascalVoc2007tiny())
+    add_version(version.pascal_voc_2007.ValidPascalVoc2007())
+    add_version(version.pascal_voc_2007.TestPascalVoc2007())
+    add_version(version.pascal_voc_2007.TrainPascalVoc2007())
+    add_version(version.pascal_voc_2007.TrainPascalVoc2007v1())
+    add_version(version.pascal_voc_2007.TrainPascalVoc2007v2())
+    add_version(version.pascal_voc_2007.TrainPascalVoc2007v3())
+    add_version(version.pascal_voc_2007.TrainPascalVoc2007v4())
+    add_version(version.pascal_voc_2007.TrainPascalVoc2007tiny())
     add_version(version.penn_fudan_ped.TrainPennFudanPedPerson())
     add_version(version.penn_fudan_ped.ValidPennFudanPedPerson())
     add_version(version.campus.TrainCampus())
