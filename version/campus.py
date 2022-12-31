@@ -55,7 +55,7 @@ class TrainCampus(Version):
         return ['person']
 
     def generate(self, batch: int):
-        n_images = 10
+        n_images = 256
         actions = [
             filter.FilterWidth(20, Comparator.GreaterEqual),
             filter.FilterHeight(20, Comparator.GreaterEqual),
