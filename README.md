@@ -110,7 +110,7 @@ python3 dataset.py --version [version] --generate
   
   </details>
 
-    <details> <summary> <b> <code> train-pascal-voc-2007-v3 </code> </b> </summary>
+  <details> <summary> <b> <code> train-pascal-voc-2007-v3 </code> </b> </summary>
     
     * Number of images: 2,500
     
@@ -137,6 +137,76 @@ python3 dataset.py --version [version] --generate
       * `iou_negative_patch = 0.2`
   
   </details>
+
+  <details> <summary> <b> <code> train-pascal-voc-2007-v4 </code> </b> </summary>
+    
+    * Number of images: 2,500
+    
+    * Number of Classes: 20
+    
+    * Source: Pascal VOC 2007 - Train
+
+    * Actions
+
+      * `filter.FilterWidth(50, Comparator.GreaterEqual)`
+      
+      * `filter.FilterHeight(50, Comparator.GreaterEqual)`
+      
+      * `transform.RandomResize(width_range=(50, 150), aspect_ratio=transform.Resize.AUTO_ASPECT_RATIO)`
+
+      * `filter.FilterWidth(30, Comparator.GreaterEqual)`
+
+      * `filter.FilterHeight(30, Comparator.GreaterEqual)`
+
+      * `transform.SoftEdge(13, 20)`
+
+    * Kwargs
+
+      * `max_n_patches = 20`
+
+      * `visibility_threshold = 0.8`
+      
+      * `ratio_negative_patch = 5.0`
+      
+      * `iou_negative_patch = 0.2`
+  
+  </details>
+
+  <details> <summary> <b> <code> train-penn-fudan-ped-person </code> </b> </summary>
+    
+    * Number of images: 100
+    
+    * Number of Classes: 1
+    
+    * Source: Penn Fudan Ped
+  
+  </details>
+
+  <details> <summary> <b> <code> train-campus </code> </b> </summary>
+    
+    * Number of images: 250
+    
+    * Number of Classes: 1
+    
+    * Source: Campus - Garden1, Penn Fudan Ped
+
+    * Actions
+
+      * `filter.FilterWidth(20, Comparator.GreaterEqual)`
+      
+      * `filter.FilterHeight(20, Comparator.GreaterEqual)`
+      
+      * `transform.RandomResize(height_range=(150, 600), aspect_ratio=transform.Resize.AUTO_ASPECT_RATIO)`
+
+      * `transform.SoftEdge(5, 10)`
+
+    * Kwargs
+
+      * `max_n_patches = 30`
+
+      * `visibility_threshold = 0.8`
+        
+  </details>
   
 * **Validation Dataset**
   
@@ -149,6 +219,26 @@ python3 dataset.py --version [version] --generate
     * Source: Pascal VOC 2007 - Val
       
   </details>
+
+  <details> <summary> <b> <code> valid-penn-fudan-ped-person </code> </b> </summary>
+    
+    * Number of images: 70
+    
+    * Number of Classes: 1
+    
+    * Source: Penn Fudan Ped
+  
+  </details>
+
+  <details> <summary> <b> <code> valid-campus </code> </b> </summary>
+    
+    * Number of images: 256
+    
+    * Number of Classes: 1
+    
+    * Source: Campus - Garden1
+  
+  </details>
   
 * **Test Dataset**
   
@@ -160,6 +250,16 @@ python3 dataset.py --version [version] --generate
     
     * Source: Pascal VOC 2007 - Test
       
+  </details>
+
+  <details> <summary> <b> <code> test-campus </code> </b> </summary>
+    
+    * Number of images: ? (will be updated soon)
+    
+    * Number of Classes: 1
+    
+    * Source: Campus - Garden1
+  
   </details>
 
 ---
