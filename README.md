@@ -212,7 +212,7 @@ python3 dataset.py --version [version] --generate
   
   <details> <summary> <b> <code> valid-pascal-voc-2007 </code> </b> </summary>
     
-    * Number of Images: 2510
+    * Number of Images: 2,510
     
     * Number of Classes: 20
     
@@ -244,7 +244,7 @@ python3 dataset.py --version [version] --generate
   
   <details> <summary> <b> <code> test-pascal-voc-2007 </code> </b> </summary>
     
-    * Number of Images: 4952
+    * Number of Images: 4,952
     
     * Number of Classes: 20
     
@@ -254,7 +254,7 @@ python3 dataset.py --version [version] --generate
 
   <details> <summary> <b> <code> test-campus </code> </b> </summary>
     
-    * Number of images: ? (will be updated soon)
+    * Number of images: 11,538
     
     * Number of Classes: 1
     
