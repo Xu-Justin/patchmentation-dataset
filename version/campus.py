@@ -83,10 +83,10 @@ class ValidCampus(Version):
     @property
     def dataset(self):
         image_patches: List[ImagePatch] = []
-        image_patches += patchmentation.data.campus.Garden1.IP1().load().image_patches[1:64]
-        image_patches += patchmentation.data.campus.Garden1.Contour2().load().image_patches[1:64]
-        image_patches += patchmentation.data.campus.Garden1.HC2().load().image_patches[1:64]
-        image_patches += patchmentation.data.campus.Garden1.HC3().load().image_patches[1:64]
+        image_patches += patchmentation.data.campus.Garden1.IP1().load().image_patches[1:65]
+        image_patches += patchmentation.data.campus.Garden1.Contour2().load().image_patches[1:65]
+        image_patches += patchmentation.data.campus.Garden1.HC2().load().image_patches[1:65]
+        image_patches += patchmentation.data.campus.Garden1.HC3().load().image_patches[1:65]
         for image_patch in image_patches:
             for patch in image_patch.patches:
                 patch.class_name = 'person'
@@ -107,10 +107,10 @@ class TestCampus(Version):
     @property
     def dataset(self):
         image_patches: List[ImagePatch] = []
-        image_patches += patchmentation.data.campus.Garden1.IP1().load().image_patches[64:]
-        image_patches += patchmentation.data.campus.Garden1.Contour2().load().image_patches[64:]
-        image_patches += patchmentation.data.campus.Garden1.HC2().load().image_patches[64:]
-        image_patches += patchmentation.data.campus.Garden1.HC3().load().image_patches[64:]
+        image_patches += patchmentation.data.campus.Garden1.IP1().load().image_patches[65:]
+        image_patches += patchmentation.data.campus.Garden1.Contour2().load().image_patches[65:]
+        image_patches += patchmentation.data.campus.Garden1.HC2().load().image_patches[65:]
+        image_patches += patchmentation.data.campus.Garden1.HC3().load().image_patches[65:]
         for image_patch in image_patches:
             for patch in image_patch.patches:
                 patch.class_name = 'person'
