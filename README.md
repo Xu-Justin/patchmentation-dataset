@@ -2,37 +2,27 @@
 
 This datasets are used to benchmark patch augmentation performance of [patchmentation](https://github.com/Xu-Justin/patchmentation).
 
-## Quickstart
+## Dependency
 
-* Run the following commands to install the requirements.
+* Using PIP
 
-```bash
-pip install -r requirements.txt
-```
+  ```bash
+  pip install -r requirements.txt
+  ```
 
-* Run the following commands to generate the dataset.
+* Using Docker (recommended)
+  
+  ```bash
+  docker pull jstnxu/patchmentation:dataset
+  docker run -it \
+    -v {cache_folder}:/root/.cache/patchmentation-data \
+    -v {data_folder}:/workspace/data \
+    jstnxu/patchmentation:dataset /bin/bash
+  ```
+  
+  * change `{cache_folder}` to local path to save cache.
 
-```bash
-python3 dataset.py --version [version] --generate
-```
-
-## Arguments
-
-| Priority* |    Arguments   |        Type       | Description                                                                                                      |
-|:---------:|:--------------:|:-----------------:|------------------------------------------------------------------------------------------------------------------|
-|     -     |   `--version`  | one or more `str` | Dataset version(s).                                                                                              |
-|     -     |  `--overwrite` |    `store_true`   | Overwrite existing dataset / zip.                                                                                |
-|     -     |    `--batch`   |       `int`       | Number of batch to generate (default=`1`)                                                                        |
-|     1     |  `--generate`  |    `store_true`   | Generate the dataset. If `overwrite` is true, it will remove the dataset (if exists) before generating.          |
-|     2     |     `--zip`    |    `store_true`   | Zip the dataset. If `overwrite` is true, it will remove the dataset zip (if exists) before zipping.              |
-|     3     |   `--upload`   |    `store_true`   | Upload the dataset zip.                                                                                          |
-|     4     | `--remove-zip` |    `store_true`   | Remove the dataset zip, if exists.                                                                               |
-|     5     |  `--download`  | one or more `url` | Download the dataset zip. If `overwrite` is true, it will remove the dataset zip (if exists) before downloading. |
-|     6     |    `--unzip`   |    `store_true`   | Unzip the dataset zip. If `overwrite` is true, it will remove the dataset (if exists) before unzipping.          |
-|     7     |  `--validate`  |    `store_true`   | Validate the dataset.                                                                                            |
-|     8     |   `--remove`   |    `store_true`   | Remove the dataset, if exists.                                                                                   |
-
-**Smaller priority number will be executed first*
+  * change `{data_folder}` to local path to save generated data.
 
 ## Dataset Spesification
 
@@ -45,6 +35,10 @@ python3 dataset.py --version [version] --generate
     * Number of Classes: 20
     
     * Source: Pascal VOC 2007 - Train
+
+    ```bash
+    python3 dataset.py --version train-pascal-voc-2007 --generate
+    ```
       
   </details>
 
@@ -55,6 +49,10 @@ python3 dataset.py --version [version] --generate
     * Number of Classes: 20
     
     * Source: Pascal VOC 2007 - Train
+
+    ```bash
+    python3 dataset.py --version train-pascal-voc-2007-tiny --generate --batch 2
+    ```
   
   </details>
   
@@ -77,6 +75,12 @@ python3 dataset.py --version [version] --generate
     * Kwargs
 
       * `max_n_patches = 10`
+
+    <br>
+
+    ```bash
+    python3 dataset.py --version train-pascal-voc-2007-v1 --generate --batch 30
+    ```
   
   </details>
 
@@ -107,6 +111,12 @@ python3 dataset.py --version [version] --generate
       * `max_n_patches = 20`
 
       * `visibility_threshold = 1.0`
+
+    <br>
+
+    ```bash
+    python3 dataset.py --version train-pascal-voc-2007-v2 --generate --batch 30
+    ```
   
   </details>
 
@@ -135,6 +145,12 @@ python3 dataset.py --version [version] --generate
       * `ratio_negative_patch = 5.0`
       
       * `iou_negative_patch = 0.2`
+
+    <br>
+
+    ```bash
+    python3 dataset.py --version train-pascal-voc-2007-v3 --generate --batch 30
+    ```
   
   </details>
 
@@ -169,6 +185,12 @@ python3 dataset.py --version [version] --generate
       * `ratio_negative_patch = 5.0`
       
       * `iou_negative_patch = 0.2`
+
+    <br>
+
+    ```bash
+    python3 dataset.py --version train-pascal-voc-2007-v4 --generate --batch 30
+    ```
   
   </details>
 
@@ -179,6 +201,10 @@ python3 dataset.py --version [version] --generate
     * Number of Classes: 1
     
     * Source: Penn Fudan Ped
+
+    ```bash
+    python3 dataset.py --version train-penn-fudan-ped-person --generate --batch 100
+    ```
   
   </details>
 
@@ -205,6 +231,12 @@ python3 dataset.py --version [version] --generate
       * `max_n_patches = 30`
 
       * `visibility_threshold = 0.8`
+
+    <br>
+
+    ```bash
+    python3 dataset.py --version train-campus --generate --batch 50
+    ```
         
   </details>
   
@@ -217,6 +249,10 @@ python3 dataset.py --version [version] --generate
     * Number of Classes: 20
     
     * Source: Pascal VOC 2007 - Val
+
+    ```bash
+    python3 dataset.py --version valid-pascal-voc-2007 --generate
+    ```
       
   </details>
 
@@ -227,6 +263,10 @@ python3 dataset.py --version [version] --generate
     * Number of Classes: 1
     
     * Source: Penn Fudan Ped
+
+    ```bash
+    python3 dataset.py --version valid-penn-fudan-ped-person --generate
+    ```
   
   </details>
 
@@ -237,6 +277,10 @@ python3 dataset.py --version [version] --generate
     * Number of Classes: 1
     
     * Source: Campus - Garden1
+
+    ```bash
+    python3 dataset.py --version valid-campus --generate
+    ```
   
   </details>
   
@@ -249,6 +293,10 @@ python3 dataset.py --version [version] --generate
     * Number of Classes: 20
     
     * Source: Pascal VOC 2007 - Test
+
+    ```bash
+    python3 dataset.py --version test-pascal-voc-2007 --generate
+    ```
       
   </details>
 
@@ -259,8 +307,31 @@ python3 dataset.py --version [version] --generate
     * Number of Classes: 1
     
     * Source: Campus - Garden1
+
+    ```bash
+    python3 dataset.py --version test-campus --generate
+    ```
   
   </details>
+
+
+## Arguments
+
+| Priority* |    Arguments   |        Type       | Description                                                                                                      |
+|:---------:|:--------------:|:-----------------:|------------------------------------------------------------------------------------------------------------------|
+|     -     |   `--version`  | one or more `str` | Dataset version(s).                                                                                              |
+|     -     |  `--overwrite` |    `store_true`   | Overwrite existing dataset / zip.                                                                                |
+|     -     |    `--batch`   |       `int`       | Number of batch to generate (default=`1`)                                                                        |
+|     1     |  `--generate`  |    `store_true`   | Generate the dataset. If `overwrite` is true, it will remove the dataset (if exists) before generating.          |
+|     2     |     `--zip`    |    `store_true`   | Zip the dataset. If `overwrite` is true, it will remove the dataset zip (if exists) before zipping.              |
+|     3     |   `--upload`   |    `store_true`   | Upload the dataset zip.                                                                                          |
+|     4     | `--remove-zip` |    `store_true`   | Remove the dataset zip, if exists.                                                                               |
+|     5     |  `--download`  | one or more `url` | Download the dataset zip. If `overwrite` is true, it will remove the dataset zip (if exists) before downloading. |
+|     6     |    `--unzip`   |    `store_true`   | Unzip the dataset zip. If `overwrite` is true, it will remove the dataset (if exists) before unzipping.          |
+|     7     |  `--validate`  |    `store_true`   | Validate the dataset.                                                                                            |
+|     8     |   `--remove`   |    `store_true`   | Remove the dataset, if exists.                                                                                   |
+
+**Smaller priority number will be executed first*
 
 ---
 
