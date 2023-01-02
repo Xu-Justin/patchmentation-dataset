@@ -1,6 +1,8 @@
 FROM jstnxu/patchmentation:env
 
-RUN pip --no-cache-dir install -r /requirements.txt
-
 WORKDIR /workspace
+
+COPY . .
+RUN pip --no-cache-dir install -r requirements.txt
+
 CMD ["bash"]
