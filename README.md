@@ -2,6 +2,8 @@
 
 This datasets are used to benchmark patch augmentation performance of [patchmentation](https://github.com/Xu-Justin/patchmentation).
 
+The benchmarking results can be found at [Xu-Justin/patchmentation-yolov5](https://github.com/Xu-Justin/patchmentation-yolov5#experiment-results-and-comparison).
+
 ## Dependency
 
 * Using PIP
