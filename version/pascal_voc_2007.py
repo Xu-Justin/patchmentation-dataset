@@ -37,7 +37,7 @@ class TrainPascalVoc2007tiny(Version):
 
     def generate(self, batch: int):
         dataset = self.dataset
-        n_images = 200
+        n_images = 20
         for i in range(batch):
             if os.path.exists(self.version_folder_batch(i)):
                 continue
@@ -55,7 +55,7 @@ class TrainPascalVoc2007v1(Version):
 
     def generate(self, batch: int):
         dataset = self.dataset
-        n_images = 2500
+        n_images = 100
         actions = [
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
@@ -81,7 +81,7 @@ class TrainPascalVoc2007v2(Version):
 
     def generate(self, batch: int):
         dataset = self.dataset
-        n_images = 2500
+        n_images = 100
         actions = [
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
@@ -111,7 +111,7 @@ class TrainPascalVoc2007v3(Version):
 
     def generate(self, batch: int):
         dataset = self.dataset
-        n_images = 2500
+        n_images = 100
         actions = [
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
@@ -140,7 +140,7 @@ class TrainPascalVoc2007v4(Version):
 
     def generate(self, batch: int):
         dataset = self.dataset
-        n_images = 2500
+        n_images = 100
         actions = [
             filter.FilterWidth(50, Comparator.GreaterEqual),
             filter.FilterHeight(50, Comparator.GreaterEqual),
